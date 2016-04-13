@@ -19,16 +19,18 @@ public class Template {
     #else
     #if os(Linux)
       let useBundle = bundle ?? NSBundle.mainBundle()
+      
+      let url = useBundle.URLForResource(named, withExtension: nil)
     #else
       let useBundle = bundle ?? NSBundle.main()
+      let url = useBundle.urlForResource(named, withExtension: nil)
     #endif
-      guard let url = useBundle.urlForResource(named, withExtension: nil) else {
+    #endif
+    	
+      guard let bundleURL = url else {
         throw NSError(domain: NSCocoaErrorDomain, code: NSFileNoSuchFileError, userInfo: nil)
       }
-    #endif
-    
-    
-    try self.init(URL:url)
+    try self.init(URL: bundleURL)
   }
   
   /// Create a template with a file found at the given URL
