@@ -3,7 +3,7 @@ public class IfNode : NodeType {
   public let trueNodes:[NodeType]
   public let falseNodes:[NodeType]
 
-  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
+  public class func parse(_ parser: TokenParser, token: Token) throws -> NodeType {
     let components = token.components()
     guard components.count == 2 else {
       throw TemplateSyntaxError("'if' statements should use the following 'if condition' `\(token.contents)`.")
@@ -26,7 +26,7 @@ public class IfNode : NodeType {
     return IfNode(variable: variable, trueNodes: trueNodes, falseNodes: falseNodes)
   }
 
-  public class func parse_ifnot(parser:TokenParser, token:Token) throws -> NodeType {
+  public class func parse_ifnot(_ parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
     guard components.count == 2 else {
       throw TemplateSyntaxError("'ifnot' statements should use the following 'if condition' `\(token.contents)`.")
@@ -55,7 +55,7 @@ public class IfNode : NodeType {
     self.falseNodes = falseNodes
   }
 
-  public func render(context: Context) throws -> String {
+  public func render(_ context: Context) throws -> String {
     let result = try variable.resolve(context)
     var truthy = false
 

@@ -18,7 +18,7 @@ public class IncludeNode : NodeType {
     self.templateName = templateName
   }
   
-  public func render(context: Context) throws -> String {
+  public func render(_ context: Context) throws -> String {
     guard let loader = context["loader"] as? TemplateLoader else {
       throw TemplateSyntaxError("Template loader not in context")
     }

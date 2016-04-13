@@ -2,7 +2,7 @@ import Foundation
 
 
 /// Split a string by spaces leaving quoted phrases together
-func smartSplit(value: String) -> [String] {
+func smartSplit(_ value: String) -> [String] {
   var word = ""
   var separator: Character = " "
   var components: [String] = []

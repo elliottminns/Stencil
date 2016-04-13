@@ -1,4 +1,4 @@
-public func until(tags: [String]) -> ((TokenParser, Token) -> Bool) {
+public func until(_ tags: [String]) -> ((TokenParser, Token) -> Bool) {
   return { parser, token in
     if let name = token.components().first {
       for tag in tags {
@@ -31,7 +31,7 @@ public class TokenParser {
     return try parse(nil)
   }
   
-  public func parse(parse_until:((parser:TokenParser, token:Token) -> (Bool))?) throws -> [NodeType] {
+  public func parse(_ parse_until:((parser:TokenParser, token:Token) -> (Bool))?) throws -> [NodeType] {
     var nodes = [NodeType]()
     
     while tokens.count > 0 {
@@ -77,7 +77,7 @@ public class TokenParser {
     return nil
   }
   
-  public func prependToken(token:Token) {
+  public func prependToken(_ token: Token) {
     #if !swift(>=3.0)
       tokens.insert(token, atIndex: 0)
     #else
@@ -86,7 +86,7 @@ public class TokenParser {
     
   }
   
-  public func findFilter(name: String) throws -> Filter {
+  public func findFilter(_ name: String) throws -> Filter {
     if let filter = namespace.filters[name] {
       return filter
     }
@@ -94,7 +94,7 @@ public class TokenParser {
     throw TemplateSyntaxError("Invalid filter '\(name)'")
   }
   
-  func compileFilter(token: String) throws -> Resolvable {
+  func compileFilter(_ token: String) throws -> Resolvable {
     return try FilterExpression(token: token, parser: self)
   }
 }

@@ -4,7 +4,7 @@ public class ForNode : NodeType {
   let nodes:[NodeType]
   let emptyNodes: [NodeType]
   
-  public class func parse(parser:TokenParser, token:Token) throws -> NodeType {
+  public class func parse(_ parser:TokenParser, token:Token) throws -> NodeType {
     let components = token.components()
     
     guard components.count == 4 && components[2] == "in" else {
@@ -37,7 +37,7 @@ public class ForNode : NodeType {
     self.emptyNodes = emptyNodes
   }
   
-  public func render(context: Context) throws -> String {
+  public func render(_ context: Context) throws -> String {
     let values = try variable.resolve(context)
     
     if let values = values as? [Any] where values.count > 0 {

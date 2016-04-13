@@ -23,7 +23,7 @@
       self.format = format ?? Variable("\"yyyy-MM-dd 'at' HH:mm\"")
     }
     
-    public func render(context: Context) throws -> String {
+    public func render(_ context: Context) throws -> String {
       let date = NSDate()
       let format = try self.format.resolve(context)
       var formatter:NSDateFormatter?

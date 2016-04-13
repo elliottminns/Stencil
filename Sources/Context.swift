@@ -42,7 +42,7 @@ public class Context {
   }
   
   /// Push a new level into the Context
-  private func push(dictionary: [String: Any]? = nil) {
+  private func push(_ dictionary: [String: Any]? = nil) {
     dictionaries.append(dictionary ?? [:])
   }
   
@@ -52,7 +52,7 @@ public class Context {
   }
   
   /// Push a new level onto the context for the duration of the execution of the given closure
-  public func push<Result>(dictionary: [String: Any]? = nil, @noescape closure: (() throws -> Result)) rethrows -> Result {
+  public func push<Result>(_ dictionary: [String: Any]? = nil, @noescape closure: (() throws -> Result)) rethrows -> Result {
     push(dictionary)
     defer { pop() }
     return try closure()
