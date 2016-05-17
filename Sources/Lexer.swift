@@ -7,7 +7,7 @@ public struct Lexer {
 
   func createToken(_ string: String) -> Token {
     func strip() -> String {
-      return string[string.startIndex.successor().successor()..<string.endIndex.predecessor().predecessor()].trim(" ")
+      return string[string.index(string.startIndex, offsetBy: 2) ..< string.index(string.endIndex, offsetBy: -2)].trim(" ")
     }
 
     if string.hasPrefix("{{") {
@@ -84,7 +84,7 @@ class Scanner {
         return result
       }
 
-      index = index.successor()
+      index = content.index(after: index)
     }
 
     return ""
@@ -106,7 +106,7 @@ class Scanner {
         }
       }
 
-      index = index.successor()
+      index = content.index(after: index)
     }
 
     return nil
@@ -121,19 +121,19 @@ extension String {
       if character != self[index] {
         return index
       }
-      index = index.successor()
+      index = self.index(after: index)
     }
 
     return nil
   }
 
   func findLastNot(_ character: Character) -> String.Index? {
-    var index = endIndex.predecessor()
+    var index = self.index(before: endIndex)
     while index != startIndex {
       if character != self[index] {
-        return index.successor()
+        return self.index(after: index)
       }
-      index = index.predecessor()
+      index = self.index(before: index)
     }
 
     return nil

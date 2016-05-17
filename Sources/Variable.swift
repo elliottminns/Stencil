@@ -60,7 +60,7 @@ public struct Variable : Equatable, Resolvable {
     
     if (variable.hasPrefix("'") && variable.hasSuffix("'")) || (variable.hasPrefix("\"") && variable.hasSuffix("\"")) {
       // String literal
-      return variable[variable.startIndex.successor() ..< variable.endIndex.predecessor()]
+      return variable[variable.index(after: variable.startIndex) ..< variable.index(before: variable.endIndex)]
     }
     
     for bit in lookup() {
